@@ -1,0 +1,15 @@
+%! TEX root = standalone_fig_export.tex
+% Simple document used to import tikz pictures as standalone pdf.
+% Usefull for drafting, where one does not want to compile the tikz 
+% figures with the document.
+
+\documentclass[tikz, border=1cm, convert={outfile=\jobname.svg}]{standalone}
+\usepackage{tikz}
+%\usetikzlibrary{external}
+
+%\tikzexternalize{prefix={ext/}}
+
+\begin{document}
+   \input{one_state_momdp.tex}
+\end{document}
+

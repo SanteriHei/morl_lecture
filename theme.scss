@@ -1,0 +1,15 @@
+/*-- scss:defaults --*/
+$presentation-font-smaller: 0.6 !default;
+
+$presentation-h1-font-size: 2em !default;
+$presentation-h2-font-size: 1.3em !default;
+
+$presentation-heading-font: roboto, Palatino, FreeSerif, serif !default;
+$font-family-sans-serif: roboto, Palatino, FreeSerif, serif !default;
+
+
+/*-- scss:rules --*/
+.alert {
+  color: #08457E;
+  font-style: italic;
+}
