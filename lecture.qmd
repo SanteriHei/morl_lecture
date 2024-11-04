@@ -36,7 +36,7 @@ resources:
 
 ::: {.column width="50%"}
 ![Conceptual Pareto front for two objectives. Each point in the
-plot represents a value of policy $\pi$ with given preference $\mathbf{\omega}$ ](./figures/conceptual-pareto-front.svg){#fig-conceptual-pf width="500"
+plot represents a value of policy $\pi$ with given preference $\mathbf{w}$ ](./figures/conceptual-pareto-front.svg){#fig-conceptual-pf width="500"
 height="250"}
 :::
 
@@ -56,7 +56,7 @@ height="250"}
    from engineer to end-user.
 2. The desired trade-off can be determined [after]{.alert} the optimization is
    done and the results can be observed.
-3. There might uncertainty in user preferences between objectives.
+3. There may be uncertainty in user preferences between objectives.
 
 :::
 
@@ -116,18 +116,18 @@ height="250"}
   presented as a *multi-objective* Markov decision process *MOMDP*: $\langle S,
   A, T, \gamma, \mu, \mathbf{R}\rangle$.
 - The major difference to the traditional MDP's is the inclusion of
-  vector valued reward function $\mathbf{R}:
+  [vector valued]{.alert} reward function $\mathbf{R}:
   S \times A \times S \rightarrow \mathbb{R}^d$, where $d \geq 2$ is the number
   of objectives.
 
-- [Vector-valued]{.alert} value-function is defined as in the single-objective case:
+- Vector-valued value-function is defined as in the single-objective case:
   $$\mathbf{V}^{\pi} = \mathbb{E}\left[\sum_{i=0}^\infty \gamma^i
   \mathbf{r}_{i+1}\,\vert\,\pi, \mu\right]$$
 
 - Consider two policies $\pi$ and $\pi'$ with two objectives $i$ and $j$:
   - It is possible to find situation such that $V_i^\pi > V_i^{\pi'}$  while 
     $V_j^\pi < V_j^{\pi'}$
-  - Value-function defines only *partial* ordering over the value-space.
+  - Value-function defines only [partial]{.alert} ordering over the value-space.
 
 :::
 
@@ -152,8 +152,10 @@ height="250"}
   $$
   u: \mathbb{R}^d \rightarrow \mathbb{R}
   $$
-- In practice, the utility functions are parameterized by user preferences
-  $\mathbf{w}$ over the objectives.
+- In practive, the user prefernces are defined as a weight vector:
+  $$
+  \mathbf{w} = [w_1, w_2, \dots, w_d],\; \sum_{i=1}^d w_i = 1 \land \forall i\; 0 < w_i < 1
+  $$
 - The vector-valued value-function can be converted back to
   scalar-valued function using the utility function 
   $$
@@ -182,7 +184,7 @@ height="250"}
 ## Types of utility functions {.center}
 
 ::: {.incremental}
-- Intuitively, the scalarized value-function should *increase*, if the value
+- Intuitively, the scalarized value-function should [increase]{.alert}, if the value
   of one of the objectives increases, while values of other objectives stay the same.
   - i.e. $u([0.5, 0.5]) > u([0.5, 0.1])$.
 
@@ -194,8 +196,8 @@ height="250"}
 
 - [Linear]{.alert} utility functions are commonly used in practice
   - $V_{\mathbf{w}}^\pi = \mathbf{w}^T \mathbf{V}^\pi$
-  - In addition of having certain crucial theoretical properties, they are easy 
-    to interpret.
+  - In addition to having certain important theoretical properties (coming up),
+    they are easy also to interpret.
 :::
 
 ::: {.notes}
@@ -247,7 +249,7 @@ height="250"}
 
 - Recall Bellman equation:
   $$
-  \mathbf{V}^{\pi}(s) = \mathbf{R}_t + \gamma \sum_{s'} P\big(s'\,\vert\,s, \pi(s)\big)\mathbf{V}^\pi(s')
+  \mathbf{V}^{\pi}(s) = \underbrace{\mathbf{R}_t}_{\text{Immediate reward}} + \gamma \underbrace{\sum_{s'} P\big(s'\,\vert\,s, \pi(s)\big)\mathbf{V}^\pi(s')}_{\text{expected reward from state $s'$ onwards}}
   $$
 
 - Consider what happens with the ESR optimality criterion with non-linear utility function.
@@ -280,7 +282,7 @@ height="250"}
 
 ::: {.incremental}
 - Previous slides: The agent optimizes the [scalarized expected return/expected
-  scalarized return]{.alert}. Howver, our goal is to find a *set of solutions*.
+  scalarized return]{.alert}. However, our goal is to find a [set of solutions]{.alert}.
 
 - [@roijers_multi-objective_2017] identified two approaches for solving a MORL
   task.
@@ -315,10 +317,9 @@ height="250"}
 :::: {.columns}
 
 ::: {.column width="55%" .incremental}
- - If utility function is linear, then deterministic stationary policies 
-   can produce optimal solutions.
-   [@roijers_survey_2013]^[This holds under the utility based viewpoint]
- - Deterministic policies from @fig-one-state-momdp have values: 
+ - The one-state MOMDP in @fig-one-state-momdp contains 3 deterministic
+   stationary policies.
+ - These deterministic policies have values: 
    $\mathbf{V}^{\pi_1} = \big(3 / (1 - \gamma), 0\big)$,
    $\mathbf{V}^{\pi_2} = \big(0, 3 / (1 - \gamma)\big)$,
    $\mathbf{V}^{\pi_3} = \big(1/(1 - \gamma), 1/(1-\gamma)\big)$
@@ -354,7 +355,7 @@ height="250"}
 
 :::: 
 
-## Value functions are convex
+## Are linear utility functions all you need? 
 
 ::: {.incremental}
 - Can non-convex portions of the Pareto-front be recovered using the
@@ -377,7 +378,6 @@ height="250"}
 :::
 
 
-
 ::: {.notes}
 - As we have seen previously, the linear utility functions are convinient:
   1. One can use existing methods
@@ -392,9 +392,9 @@ height="250"}
 :::
 
 
-## Performance indicators
+## Performance indicators {visibility="hidden"}
 
-::: {.incremental}
+::: {}
 - Two different view points: [axiomatic]{.alert} and [utility based]{.alert}
 - Advantages and disadvantages of both cases.
 - The disagreement of the agent optimizing the reward, while we care about the
@@ -403,8 +403,15 @@ height="250"}
 
 :::
 
+## Reading material
+- [Excellent overview of theory and applications of Multi-objective sequential decision making algorithms]{.alert}:
+  Hayes, Conor F., Roxana Rădulescu, Eugenio Bargiacchi, Johan Källström, Matthew Macfarlane, Mathieu Reymond, Timothy Verstraeten, et al. 2022. “A Practical Guide to Multi-Objective Reinforcement Learning and Planning.” Autonomous Agents and Multi-Agent Systems 36 (1): 26. https://doi.org/10.1007/s10458-022-09552-y.
+- [More theoretical survey of MOMDPS]{.alert}: Roijers, Diederik M., Peter Vamplew,
+  Shimon Whiteson, and Richard Dazeley. 2013. “A Survey of Multi-Objective Sequential Decision-Making.” Journal of Artificial Intelligence Research 48 (October):67–113. https://doi.org/10.1613/jair.3987.
+- [Practical algorithm for Continuous control tasks]{.alert}: Xu, Jie, Yunsheng Tian, Pingchuan Ma, Daniela Rus, Shinjiro Sueda, and Wojciech Matusik. 2022. “Prediction-Guided Multi-Objective Reinforcement Learning  for Continuous Robot Control.” In Proceedings of the 37th International Conference on Machine Learning, edited by Hal Daumé III and Aarti Singh, 119:10607–16. Proceedings of Machine Learning Research. PMLR. https://proceedings.mlr.press/v119/xu20h.html.
+- [Sample-efficient MORL algorithm based on GPI]{.alert}: Alegre, Lucas N.,
+  Ana L. C. Bazzan, Diederik M. Roijers, Ann Nowé, and Bruno C. da Silva. 2023. “Sample-Efficient Multi-Objective Learning via Generalized Policy Improvement Prioritization.” In Proceedings of the 2023 International Conference on Autonomous Agents and Multiagent Systems, edited by Noa Agmon, Bo An, Alessandro Ricci, and William Yeoh, 2003–12. London, United Kingdom: International Foundationfor Autonomous Agents and Multiagent systems. https://doi.org/10.5555/3545946.3598872.
 
-## Open questions and challenges
 
 ## References
 ::: {#refs}
@@ -412,129 +419,6 @@ height="250"}
 :::
 
 
-## Fragments
 
-Incremental text display and animation with fragments:
-
-<br/>
-
-::: {.fragment .fade-in}
-Fade in
-:::
-
-::: {.fragment .fade-up}
-Slide up while fading in
-:::
-
-::: {.fragment .fade-left}
-Slide left while fading in
-:::
-
-::: {.fragment .fade-in-then-semi-out}
-Fade in then semi out
-:::
-
-. . .
-
-::: {.fragment .strike}
-Strike
-:::
-
-::: {.fragment .highlight-red}
-Highlight red
-:::
-
-::: footer
-Learn more: [Fragments](https://quarto.org/docs/presentations/revealjs/advanced.html#fragments)
-:::
-
-## Slide Backgrounds {background="#43464B"}
-
-Set the `background` attribute on a slide to change the background color (all CSS color formats are supported).
-
-Different background transitions are available via the `background-transition` option.
-
-::: footer
-Learn more: [Slide Backgrounds](https://quarto.org/docs/presentations/revealjs/#color-backgrounds)
-:::
-
-## Auto-Animate {auto-animate="true" auto-animate-easing="ease-in-out"}
-
-Automatically animate matching elements across slides with Auto-Animate.
-
-::: r-hstack
-::: {data-id="box1" auto-animate-delay="0" style="background: #2780e3; width: 200px; height: 150px; margin: 10px;"}
-:::
-
-::: {data-id="box2" auto-animate-delay="0.1" style="background: #3fb618; width: 200px; height: 150px; margin: 10px;"}
-:::
-
-::: {data-id="box3" auto-animate-delay="0.2" style="background: #e83e8c; width: 200px; height: 150px; margin: 10px;"}
-:::
-:::
-
-::: footer
-Learn more: [Auto-Animate](https://quarto.org/docs/presentations/revealjs/advanced.html#auto-animate)
-:::
-
-## Auto-Animate {auto-animate="true" auto-animate-easing="ease-in-out"}
-
-Automatically animate matching elements across slides with Auto-Animate.
-
-::: r-stack
-::: {data-id="box1" style="background: #2780e3; width: 350px; height: 350px; border-radius: 200px;"}
-:::
-
-::: {data-id="box2" style="background: #3fb618; width: 250px; height: 250px; border-radius: 200px;"}
-:::
-
-::: {data-id="box3" style="background: #e83e8c; width: 150px; height: 150px; border-radius: 200px;"}
-:::
-:::
-
-::: footer
-Learn more: [Auto-Animate](https://quarto.org/docs/presentations/revealjs/advanced.html#auto-animate)
-:::
-
-## Slide Transitions {.smaller}
-
-The next few slides will transition using the `slide` transition
-
-| Transition | Description                                                            |
-|------------|------------------------------------------------------------------------|
-| `none`     | No transition (default, switch instantly)                              |
-| `fade`     | Cross fade                                                             |
-| `slide`    | Slide horizontally                                                     |
-| `convex`   | Slide at a convex angle                                                |
-| `concave`  | Slide at a concave angle                                               |
-| `zoom`     | Scale the incoming slide so it grows in from the center of the screen. |
-
-::: footer
-Learn more: [Slide Transitions](https://quarto.org/docs/presentations/revealjs/advanced.html#slide-transitions)
-:::
-
-## Interactive Slides {.smaller transition="slide"}
-
-Include Jupyter widgets and htmlwidgets in your presentations
-
-Cool
-
-::: footer
-Learn more: [Jupyter widgets](https://quarto.org/docs/interactive/widgets/jupyter.html), [htmlwidgets](https://quarto.org/docs/interactive/widgets/htmlwidgets.html)
-:::
-
-## Preview Links
-
-Navigate to hyperlinks without disrupting the flow of your presentation.
-
-Use the `preview-links` option to open links in an iframe on top of your slides. Try clicking the link below for a demonstration:
-
-::: {style="text-align: center; margin-top: 1em"}
-[Matplotlib: Visualization with Python](https://matplotlib.org/){preview-link="true" style="text-align: center"}
-:::
-
-::: footer
-Learn more: [Preview Links](https://quarto.org/docs/presentations/revealjs/presenting.html#preview-links)
-:::
 
 
