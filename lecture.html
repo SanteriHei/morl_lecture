@@ -6,10 +6,11 @@
 <script src="lecture_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="lecture_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="lecture_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="lecture_files/libs/quarto-html/quarto-syntax-highlighting-2486e1f0a3ee9ee1fc393803a1361cdb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="lecture_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="lecture_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="lecture_files/libs/quarto-contrib/videojs/video.min.js"></script>
 <link href="lecture_files/libs/quarto-contrib/videojs/video-js.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.32">
+  <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Santeri Heiskanen">
   <meta name="dcterms.date" content="2025-08-10">
@@ -117,7 +118,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="lecture_files/libs/revealjs/dist/theme/quarto-187052239543f734529f62fdb5be7247.css">
+  <link rel="stylesheet" href="lecture_files/libs/revealjs/dist/theme/quarto.css">
   <link href="lecture_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="lecture_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="lecture_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -770,7 +771,7 @@ s_0\right]
 <div class="columns">
 <div class="column" style="width:55%;">
 <ul>
-<li class="fragment">The one-state MOMDP in <a href="#/fig-one-state-momdp" class="quarto-xref">Figure&nbsp;3</a> contains 3 deterministic stationary policies.</li>
+<li class="fragment">The one-state MOMDP in <a href="#/are-deterministic-stationary-policies-enough" class="quarto-xref">Figure&nbsp;3</a> contains 3 deterministic stationary policies.</li>
 <li class="fragment">These deterministic policies have values: <span class="math inline">\(\mathbf{V}^{\pi_1} = \big(3 / (1 - \gamma), 0\big)\)</span>, <span class="math inline">\(\mathbf{V}^{\pi_2} = \big(0, 3 / (1 - \gamma)\big)\)</span>, <span class="math inline">\(\mathbf{V}^{\pi_3} = \big(1/(1 - \gamma), 1/(1-\gamma)\big)\)</span></li>
 <li class="fragment">Create a <em>mixture</em> policy that selects action <span class="math inline">\(a_1\)</span> with probability <span class="math inline">\(p\)</span>, and action <span class="math inline">\(a_2\)</span> otherwise <span class="citation" data-cites="vamplew_constructing_2009">(<a href="#/references" role="doc-biblioref" onclick="">Vamplew et al. 2009</a>)</span>
 <ul>
@@ -895,15 +896,15 @@ Vamplew, Peter, Richard Dazeley, Ewan Barker, and Andrei Kelarev. 2009. <span>�
 White, D. J. 1982. <span>“Multi-Objective Infinite-Horizon Discounted Markov Decision Processes.”</span> <em>Journal of Mathematical Analysis and Applications</em> 89 (2).
 </div>
 </div>
-
-</section>
-
-    </div>
-  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
-</div></div>
+</div>
+</section>
+
+    </div>
+  </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
   <script src="lecture_files/libs/revealjs/dist/reveal.js"></script>
@@ -933,8 +934,7 @@ White, D. J. 1982. <span>“Multi-Objective Infinite-Horizon Discounted Markov D
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":false},
 'smaller': true,
  
@@ -1091,7 +1091,7 @@ White, D. J. 1982. <span>“Multi-Objective Infinite-Horizon Discounted Markov D
         maxScale: 3,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
