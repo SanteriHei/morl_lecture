@@ -3,7 +3,6 @@ title: "Introduction to multi-objective reinforcement learning"
 subtitle: ""
 date: 20-10-2024
 author: Santeri Heiskanen
-institute: Aalto University
 bibliography: citations.bib
 format:
   revealjs: 
@@ -13,6 +12,7 @@ format:
       buttons: false
     preview-links: auto
     smaller: true
+    max-scale: 3.0
 resources:
   - demo.pdf
 ---
@@ -22,6 +22,49 @@ resources:
 :::: {.columns}
 
 ::: {.column width="50%" .incremental}
+
+- Single-objective reinforcement learning (SORL): The optimal behaviour is 
+  defined via single scalar reward.
+- Multi-objective reinforcement learning (MORL): Consider [multiple
+  conflicting]{.alert} objectives simultaneously.
+- Policy $\pi$ is considered [Pareto optimal]{.alert} if it:
+   1. outperforms *all* other policies in at least one objective, and
+   2. and is (at least) equally good in other objectives.
+- Goal: Find a set of Pareto-optimal policies^[The exact goal is dependent on
+  multiple factors, including the type of utility function. See
+  @roijers_survey_2013 for more details.]
+
+:::
+
+::: {.column width="50%"}
+
+![Conceptual Pareto front for two objectives. Each point in the
+plot represents a value of policy $\pi$ with given preference $\mathbf{w}$ ](./figures/conceptual-pareto-front.svg){#fig-conceptual-pf width="500"
+height="300"}
+
+:::
+
+
+::: {.notes}
+- SORL: Optimal behaviour decided by single scalar valued reward.   
+   - Too simplistic for many real-world scenarios.
+- MORL consider multiple CONFLICTING OBJECTIVES.
+- Intuitively, one tries to find an optimal trade-off between objectives.
+- The final goal is to have a set of optimal trade-offs for different 
+  preferences.
+- NOTE: assumes that we do not know the preferences before the optimization.
+- NOTE: There are two main approaches: Utility based on axiomatic. Skip the
+  difference here.
+:::
+
+:::: 
+
+## Multi-objective reinforcement learning in a nutshell {.smaller visibility="hidden"}
+
+:::: {.columns}
+
+::: {.column width="50%" .incremental}
+
 
 - Multi-objective reinforcement learning (MORL) is an extension to single-objective
   reinforcement learning (SORL), where one considers multiple, *conflicting*
@@ -44,7 +87,7 @@ height="250"}
 - MORL consider multiple CONFLICTING OBJECTIVES.
 - Intuitively, one tries to find an optimal trade-off between objectives.
 - The final goal is to have a set of optimal trade-offs for different 
-  prefernces.
+  preferences.
 :::
 
 :::: 
@@ -80,16 +123,16 @@ height="250"}
 :::: {.columns}
 
 ::: {.column width="33%"}
-{{< video videos/halfcheetah_pref_0_overlay.mp4 width="250%">}}
+{{< video videos/halfcheetah_pref_0_overlay.mp4 >}} 
 
 :::
 
 ::: {.column width="33%"}
-{{< video videos/halfcheetah_pref_3_overlay.mp4 width="250%">}}
+{{< video videos/halfcheetah_pref_3_overlay.mp4 >}}
 :::
 
 ::: {.column width="33%"}
-{{< video videos/halfcheetah_pref_5_overlay.mp4 width="250%">}}
+{{< video videos/halfcheetah_pref_5_overlay.mp4 >}}
 :::
 
 
@@ -112,8 +155,8 @@ height="250"}
 ## Multi-objective MDPs and value-functions {.smaller}
 
 ::: {.incremental}
-- Formally, the multi-objective sequential decision making problems are
-  presented as a *multi-objective* Markov decision process *MOMDP*: $\langle S,
+- Formally, the multi-objective sequential decision making problem is presented
+  as a *multi-objective* Markov decision process *MOMDP*: $\langle S,
   A, T, \gamma, \mu, \mathbf{R}\rangle$.
 - The major difference to the traditional MDP's is the inclusion of
   [vector valued]{.alert} reward function $\mathbf{R}:
@@ -127,7 +170,7 @@ height="250"}
 - Consider two policies $\pi$ and $\pi'$ with two objectives $i$ and $j$:
   - It is possible to find situation such that $V_i^\pi > V_i^{\pi'}$  while 
     $V_j^\pi < V_j^{\pi'}$
-  - Value-function defines only [partial]{.alert} ordering over the value-space.
+  - &rarr; Value-function defines only [partial]{.alert} ordering over the value-space.
 
 :::
 
@@ -141,7 +184,7 @@ height="250"}
    scalarized reward to the vector-valued reward.
  - Issue: In MPDs, one could find the optimal policy by finding a the optimal
    value-function. In MORL, the same does not hold.
- - One needs information about the user prefernces over the objectives.
+ - One needs information about the user preferences over the objectives.
 :::
 
 ## Utility functions {.center}
@@ -152,7 +195,7 @@ height="250"}
   $$
   u: \mathbb{R}^d \rightarrow \mathbb{R}
   $$
-- In practive, the user prefernces are defined as a weight vector:
+- In practice, the user preferences are defined as a weight vector:
   $$
   \mathbf{w} = [w_1, w_2, \dots, w_d],\; \sum_{i=1}^d w_i = 1 \land \forall i\; 0 < w_i < 1
   $$
@@ -185,7 +228,8 @@ height="250"}
 
 ::: {.incremental}
 - Intuitively, the scalarized value-function should [increase]{.alert}, if the value
-  of one of the objectives increases, while values of other objectives stay the same.
+  of one objective increases, while the values of other objectives remain
+  unchanged.
   - i.e. $u([0.5, 0.5]) > u([0.5, 0.1])$.
 
 - [Monotonically increasing]{.alert} utility functions fulfill this
@@ -196,7 +240,7 @@ height="250"}
 
 - [Linear]{.alert} utility functions are commonly used in practice
   - $V_{\mathbf{w}}^\pi = \mathbf{w}^T \mathbf{V}^\pi$
-  - In addition to having certain important theoretical properties (coming up),
+  - In addition to having certain important theoretical properties,
     they are easy also to interpret.
 :::
 
@@ -230,7 +274,7 @@ height="250"}
     V_u^\pi =  \mathbb{E}\left[u\left(\sum_{i=0}^\infty \gamma^t \mathbf{r}_i\right)\,\bigg\vert\,\pi,
     s_0\right] 
     $$
-- If the utility function is [linear]{.alert}, the criteria produce same
+- If the utility function is [linear]{.alert}, both criteria produce same
   policies.
 :::
 
@@ -331,12 +375,12 @@ height="250"}
 
 ::: {.column width="45%"}
    
-![One state MOMDP with three actions. Example follows @roijers_survey_2013, adapted from @white_multi-objective_1982](./figures/one-state-momdp-v2.png){#fig-one-state-momdp height="300%"}
+![One state MOMDP with three actions. Example follows @roijers_survey_2013, adapted from @white_multi-objective_1982](./figures/one-state-momdp-v2.png){#fig-one-state-momdp height="370%"}
 
 :::
 
 ::: {.incremental}
-- To show that non-stationary policy can dominate a stationary policy, consider
+- To show that a non-stationary policy can dominate a stationary policy, consider
   similar policy to above, which alternates between actions $a_1$ and $a_2$,
   starting from $a_1$ @white_multi-objective_1982.
 :::
@@ -360,7 +404,7 @@ height="250"}
 ::: {.incremental}
 - Can non-convex portions of the Pareto-front be recovered using the
   linear utility functions?
-- [@lu_multi-objective_2023]: The value-functions are convex. Theoretically it 
+- [@lu_multi-objective_2023]: The value-functions are convex.^[ @lu_multi-objective_2023 considered stochastic stationary policies] Theoretically it 
   is possible to find the whole Pareto-front with linear utility function.
 - Existing algorithms have two bottlenecks:
   1. Preference for deterministic policies.
@@ -383,9 +427,10 @@ height="250"}
   1. One can use existing methods
   2. They are simple to understand and use.
 - Issue: They have issues recovering non-convex portions of the Pareto-front
+- It was though that this is due to non-regularly shaped value-functions.
 - It was not sure if it was even theoretically find the whole Pareto-front
   when using linear utility functions.
-- Convex value-functions: One can theoretically find the PF by traversing over 
+- Induced value-functions are **convex**: One can theoretically find the PF by traversing over 
   all preferences. 
 - NOTE: This justifies the use of the outer-loop methods!
 
@@ -403,14 +448,21 @@ height="250"}
 
 :::
 
-## Reading material
-- [Excellent overview of theory and applications of Multi-objective sequential decision making algorithms]{.alert}:
-  Hayes, Conor F., Roxana Rădulescu, Eugenio Bargiacchi, Johan Källström, Matthew Macfarlane, Mathieu Reymond, Timothy Verstraeten, et al. 2022. “A Practical Guide to Multi-Objective Reinforcement Learning and Planning.” Autonomous Agents and Multi-Agent Systems 36 (1): 26. https://doi.org/10.1007/s10458-022-09552-y.
-- [More theoretical survey of MOMDPS]{.alert}: Roijers, Diederik M., Peter Vamplew,
-  Shimon Whiteson, and Richard Dazeley. 2013. “A Survey of Multi-Objective Sequential Decision-Making.” Journal of Artificial Intelligence Research 48 (October):67–113. https://doi.org/10.1613/jair.3987.
-- [Practical algorithm for Continuous control tasks]{.alert}: Xu, Jie, Yunsheng Tian, Pingchuan Ma, Daniela Rus, Shinjiro Sueda, and Wojciech Matusik. 2022. “Prediction-Guided Multi-Objective Reinforcement Learning  for Continuous Robot Control.” In Proceedings of the 37th International Conference on Machine Learning, edited by Hal Daumé III and Aarti Singh, 119:10607–16. Proceedings of Machine Learning Research. PMLR. https://proceedings.mlr.press/v119/xu20h.html.
-- [Sample-efficient MORL algorithm based on GPI]{.alert}: Alegre, Lucas N.,
-  Ana L. C. Bazzan, Diederik M. Roijers, Ann Nowé, and Bruno C. da Silva. 2023. “Sample-Efficient Multi-Objective Learning via Generalized Policy Improvement Prioritization.” In Proceedings of the 2023 International Conference on Autonomous Agents and Multiagent Systems, edited by Noa Agmon, Bo An, Alessandro Ricci, and William Yeoh, 2003–12. London, United Kingdom: International Foundationfor Autonomous Agents and Multiagent systems. https://doi.org/10.5555/3545946.3598872.
+## Material & Resources
+
+- [MORL-baselines](https://github.com/LucasAlegre/morl-baselines): Baseline
+  algorithms.
+- [MO-Gymnasium](https://mo-gymnasium.farama.org/): Multi-objective
+  environments.
+- [Overview of theory and applications of multi-objective sequential decision
+  making algorithms](https://link.springer.com/article/10.1007/s10458-022-09552-y):  Hayes, Conor F., Roxana Rădulescu, Eugenio Bargiacchi, Johan Källström, Matthew Macfarlane, Mathieu Reymond, Timothy Verstraeten, et al. 2022. “A Practical Guide to Multi-Objective Reinforcement Learning and Planning.” Autonomous Agents and Multi-Agent Systems 36 (1): 26.
+
+- [Algorithm for continuous control tasks](https://proceedings.mlr.press/v119/xu20h.html): 
+Xu, Jie, Yunsheng Tian, Pingchuan Ma, Daniela Rus, Shinjiro Sueda, and Wojciech Matusik. 2022. “Prediction-Guided Multi-Objective Reinforcement Learning  for Continuous Robot Control.” In Proceedings of the 37th International Conference on Machine Learning.
+
+- [Sample-efficient MOLR algorithm based on GPI](https://arxiv.org/abs/2301.07784): 
+Alegre, Lucas N., Ana L. C. Bazzan, Diederik M. Roijers, Ann Nowé, and Bruno C. da Silva. 2023. “Sample-Efficient Multi-Objective Learning via Generalized Policy Improvement Prioritization.” In Proceedings of the 2023 International Conference on Autonomous Agents and Multiagent Systems.
+
 
 
 ## References

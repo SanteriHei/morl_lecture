@@ -13,3 +13,13 @@ $font-family-sans-serif: roboto, Palatino, FreeSerif, serif !default;
   color: #08457E;
   font-style: italic;
 }
+
+.reveal {
+  .slides {
+    .slide {
+      .figcaption {
+        font-size: 0.5em;
+      }
+    }
+  }
+}
