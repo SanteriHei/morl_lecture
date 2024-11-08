@@ -1,1 +1,5 @@
 lecture_files/*
+
+# Ignore quarto specific files
+/.quarto/
+/_site/
