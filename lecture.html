@@ -736,7 +736,7 @@ s_0\right]
 <li class="fragment"><p>Previous slides: The agent optimizes the <span class="alert">scalarized expected return/expected scalarized return</span>. However, our goal is to find a <span class="alert">set of solutions</span>.</p></li>
 <li class="fragment"><p><span class="citation" data-cites="roijers_multi-objective_2017">(<a href="#/references" role="doc-biblioref" onclick="">Roijers and Whiteson 2017</a>)</span> identified two approaches for solving a MORL task.</p></li>
 <li class="fragment"><p><strong>Outer loop methods</strong>:</p>
-<p>Run single-objective algorithms with different user prefererences repeatetly.</p>
+<p>Run single-objective algorithms with different user prefererences repeatedly.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a>solutions <span class="op">=</span> <span class="bu">set</span>()</span>
 <span id="cb1-2"><a href=""></a><span class="cf">for</span> w <span class="kw">in</span> W:</span>
 <span id="cb1-3"><a href=""></a>   pi_w <span class="op">=</span> SORL(w) <span class="co"># Solve single-objective problem with given w</span></span>
