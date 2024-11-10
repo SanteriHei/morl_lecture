@@ -13,8 +13,6 @@ format:
     preview-links: auto
     smaller: true
     max-scale: 3.0
-resources:
-  - demo.pdf
 ---
 
 ## Multi-objective reinforcement learning in a nutshell {.smaller}
@@ -24,22 +22,22 @@ resources:
 ::: {.column width="50%" .incremental}
 
 - Single-objective reinforcement learning (SORL): The optimal behaviour is 
-  defined via single scalar reward.
+  defined via scalar reward.
 - Multi-objective reinforcement learning (MORL): Consider [multiple
   conflicting]{.alert} objectives simultaneously.
 - Policy $\pi$ is considered [Pareto optimal]{.alert} if it:
    1. outperforms *all* other policies in at least one objective, and
-   2. and is (at least) equally good in other objectives.
-- Goal: Find a set of Pareto-optimal policies^[The exact goal is dependent on
-  multiple factors, including the type of utility function. See
-  @roijers_survey_2013 for more details.]
+   2. is (at least) equally good in other objectives.
 
+- Goal: Find a set of Pareto-optimal policies.^[The exact goal depends on
+  multiple factors, including the type of utility function. See
+  [@roijers_survey_2013] for more details.]
 :::
 
 ::: {.column width="50%"}
 
 ![Conceptual Pareto front for two objectives. Each point in the
-plot represents a value of policy $\pi$ with given preference $\mathbf{w}$ ](./figures/conceptual-pareto-front.svg){#fig-conceptual-pf width="500"
+plot represents a value of policy $\pi$ with given preference $\mathbf{w}$.](./figures/conceptual-pareto-front.svg){#fig-conceptual-pf width="500"
 height="300"}
 
 :::
@@ -155,7 +153,7 @@ height="250"}
 ## Multi-objective MDPs and value-functions {.smaller}
 
 ::: {.incremental}
-- Formally, the multi-objective sequential decision making problem is presented
+- Formally, a multi-objective sequential decision making problem is presented
   as a *multi-objective* Markov decision process *MOMDP*: $\langle S,
   A, T, \gamma, \mu, \mathbf{R}\rangle$.
 - The major difference to the traditional MDP's is the inclusion of
@@ -164,8 +162,8 @@ height="250"}
   of objectives.
 
 - Vector-valued value-function is defined as in the single-objective case:
-  $$\mathbf{V}^{\pi} = \mathbb{E}\left[\sum_{i=0}^\infty \gamma^i
-  \mathbf{r}_{i+1}\,\vert\,\pi, \mu\right]$$
+  $$\mathbf{V}^{\pi} = \mathbb{E}\left[\sum_{t=0}^\infty \gamma^t
+  \mathbf{r}_{t}\,\vert\,\pi, \mu\right]$$
 
 - Consider two policies $\pi$ and $\pi'$ with two objectives $i$ and $j$:
   - It is possible to find situation such that $V_i^\pi > V_i^{\pi'}$  while 
@@ -195,9 +193,9 @@ height="250"}
   $$
   u: \mathbb{R}^d \rightarrow \mathbb{R}
   $$
-- In practice, the user preferences are defined as a weight vector:
+- In practice, the user preferences are described as a weight vector:
   $$
-  \mathbf{w} = [w_1, w_2, \dots, w_d],\; \sum_{i=1}^d w_i = 1 \land \forall i\; 0 < w_i < 1
+  \mathbf{w} = [w_1, w_2, \dots, w_d],\; \sum_{i=1}^d w_i = 1\, \land\, \forall i:\; 0 < w_i < 1
   $$
 - The vector-valued value-function can be converted back to
   scalar-valued function using the utility function 
@@ -227,7 +225,7 @@ height="250"}
 ## Types of utility functions {.center}
 
 ::: {.incremental}
-- Intuitively, the scalarized value-function should [increase]{.alert}, if the value
+- Intuitively, the scalarized value should [increase]{.alert}, if the value
   of one objective increases, while the values of other objectives remain
   unchanged.
   - i.e. $u([0.5, 0.5]) > u([0.5, 0.1])$.
@@ -241,7 +239,7 @@ height="250"}
 - [Linear]{.alert} utility functions are commonly used in practice
   - $V_{\mathbf{w}}^\pi = \mathbf{w}^T \mathbf{V}^\pi$
   - In addition to having certain important theoretical properties,
-    they are easy also to interpret.
+    they are also easy to interpret.
 :::
 
 ::: {.notes}
@@ -261,17 +259,17 @@ height="250"}
 ## What to optimize for? {.center}
 
 ::: {.incremental}
-- In SORL, the goal is the optimize the [expected cumulative return]{.alert}.
+- In SORL, the goal is to optimize the [expected cumulative return]{.alert}.
 - MORL, there are two optimality criteria:
   - *Scalarized expected return (SER)*
     $$
-    V_u^\pi = u\Biggl(\mathbb{E}\left[\sum_{i=0}^\infty \gamma^t
-    \mathbf{r}_i\,\bigg\vert\,\pi, s_0\right] \Biggl)
+    V_u^\pi = u\Biggl(\mathbb{E}\left[\sum_{t=0}^\infty \gamma^t
+    \mathbf{r}_t\,\bigg\vert\,\pi, s_0\right] \Biggl)
     $$
 
   - *Expected scalarized return (ESR)*
     $$
-    V_u^\pi =  \mathbb{E}\left[u\left(\sum_{i=0}^\infty \gamma^t \mathbf{r}_i\right)\,\bigg\vert\,\pi,
+    V_u^\pi =  \mathbb{E}\left[u\left(\sum_{t=0}^\infty \gamma^t \mathbf{r}_t\right)\,\bigg\vert\,\pi,
     s_0\right] 
     $$
 - If the utility function is [linear]{.alert}, both criteria produce same
@@ -293,13 +291,13 @@ height="250"}
 
 - Recall Bellman equation:
   $$
-  \mathbf{V}^{\pi}(s) = \underbrace{\mathbf{R}_t}_{\text{Immediate reward}} + \gamma \underbrace{\sum_{s'} P\big(s'\,\vert\,s, \pi(s)\big)\mathbf{V}^\pi(s')}_{\text{expected reward from state $s'$ onwards}}
+  \mathbf{V}^{\pi}(s) = \underbrace{\mathbf{R}_\tau}_{\text{Immediate reward}} + \gamma \underbrace{\sum_{s'} P\big(s'\,\vert\,s, \pi(s)\big)\mathbf{V}^\pi(s')}_{\text{Expected return from state $s'$ onwards}}
   $$
 
 - Consider what happens with the ESR optimality criterion with non-linear utility function.
 - 
   $$
-  \mathbb{E}\left[u\bigg(\mathbf{R}_t + \sum_{i=t}^\infty \gamma^i \mathbf{r}_i\bigg)\,\bigg\vert\,\pi, s_t \right] \neq u(\mathbf{R}_t) + \mathbb{E}\left[ u\bigg(\sum_{i=t}^\infty \gamma^i \mathbf{r}_i\bigg)\,\bigg\vert\, \pi, s_t\right]
+  \mathbb{E}\left[u\bigg(\mathbf{R}_\tau + \sum_{t=\tau}^\infty \gamma^t \mathbf{r}_t\bigg)\,\bigg\vert\,\pi, s_\tau \right] \neq u(\mathbf{R}_\tau) + \mathbb{E}\left[ u\bigg(\sum_{t=\tau}^\infty \gamma^t \mathbf{r}_t\bigg)\,\bigg\vert\, \pi, s_\tau\right]
   $$
 - Implication: most existing methods considering MDPs cannot be used with 
   ESR optimality criterion and non-linear utility functions.
@@ -339,7 +337,7 @@ height="250"}
    ```{.python}
    solutions = set()
    for w in W:
-      pi_w = sorl(w) # Solve single-objective problem
+      pi_w = SORL(w) # Solve single-objective problem with given w
       solutions.add(pi_w)
    ```
 - **Inner loop methods**: Modify the underlying algorithm, and directly generate a solution set.
@@ -367,30 +365,32 @@ height="250"}
    $\mathbf{V}^{\pi_1} = \big(3 / (1 - \gamma), 0\big)$,
    $\mathbf{V}^{\pi_2} = \big(0, 3 / (1 - \gamma)\big)$,
    $\mathbf{V}^{\pi_3} = \big(1/(1 - \gamma), 1/(1-\gamma)\big)$
-- Create a *mixture* policy that selects action $a_1$ with probability $p$,
-  and action $a_2$ otherwise [@vamplew_constructing_2009]
+- Create a *mixture* policy $\pi_m$ that selects action $a_1$ with probability $p$,
+  and action $a_2$ otherwise [@vamplew_constructing_2009].
    - $\mathbf{V}^{\pi_m} = \big(3p / (1 - \gamma), 3(1-p)/(1 - \gamma)\big)$
 
 :::
 
 ::: {.column width="45%"}
    
-![One state MOMDP with three actions. Example follows @roijers_survey_2013, adapted from @white_multi-objective_1982](./figures/one-state-momdp-v2.png){#fig-one-state-momdp height="370%"}
+![One state MOMDP with three actions. Example follows [@roijers_survey_2013], adapted from [@white_multi-objective_1982]](./figures/one-state-momdp-v2.png){#fig-one-state-momdp height="370%"}
 
 :::
 
 ::: {.incremental}
 - To show that a non-stationary policy can dominate a stationary policy, consider
-  similar policy to above, which alternates between actions $a_1$ and $a_2$,
-  starting from $a_1$ @white_multi-objective_1982.
+  a policy that alternates between actions $a_1$ and $a_2$,
+  starting from $a_1$ [@white_multi-objective_1982].
 :::
 
 ::: {.notes}
 - NOTE: The slide is again quite dense. Take your time to explain the idea.
 - For MPD's, there always exists a stationary deterministic optimal policy.
-- Three deterministic policies, where one takes one of the actions
+- Three deterministic policies, where each policy selects always one of the actions.
 - By constructing a mixture policy, one can create a policy that dominates the 
-  deterministic policy $pi^3$ when $\gamma > 0.5$
+  deterministic policy $pi^3$ by choosing $p \in [1/3, 2/3]$
+- Moreover, one can construct non-stationary mixture policy that dominates 
+  the stationary policy $pi^3$ when $gamma > 0.5$.
 - It is not enough to consider stochastic policies. However, note that the 
   first result holds when considering linear utility function.
 - NOTE: This same example can be used to shown that stationary policies 
@@ -402,16 +402,17 @@ height="250"}
 ## Are linear utility functions all you need? 
 
 ::: {.incremental}
-- Can non-convex portions of the Pareto-front be recovered using the
-  linear utility functions?
-- [@lu_multi-objective_2023]: The value-functions are convex.^[ @lu_multi-objective_2023 considered stochastic stationary policies] Theoretically it 
-  is possible to find the whole Pareto-front with linear utility function.
+- Can non-convex portions of Pareto-front be recovered with a linear utility
+  function?
+- [@lu_multi-objective_2023]: The value-functions are convex.^[Only stochastic
+  stationary policies were considered]. &rarr; One can discover the whole Pareto-front 
+  with a linear utility function.
 - Existing algorithms have two bottlenecks:
   1. Preference for deterministic policies.
   2. Numerical instability.
 - These issues can be remedied by augmenting the reward-function with a strongly
-  concave term^[Here $\mathcal{H}(q) = - \int q(a) \log q(a) da$ is the entropy
-  operator. However, in theory any strongly concave function can be used.]:
+  concave term^[Here the entropy operator $\mathcal{H}(q) = - \int q(a) \log
+  q(a) da$ is used. However, in theory any strongly concave function can be used.]:
   $$
   \pi(\cdot;\mathbf{w})
   = \underset{\pi'(\cdot;\mathbf{w})}{\mathrm{arg\;max}}\,
@@ -423,7 +424,7 @@ height="250"}
 
 
 ::: {.notes}
-- As we have seen previously, the linear utility functions are convinient:
+- As we have seen previously, the linear utility functions are convenient:
   1. One can use existing methods
   2. They are simple to understand and use.
 - Issue: They have issues recovering non-convex portions of the Pareto-front
@@ -435,7 +436,6 @@ height="250"}
 - NOTE: This justifies the use of the outer-loop methods!
 
 :::
-
 
 ## Performance indicators {visibility="hidden"}
 
