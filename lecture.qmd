@@ -332,7 +332,7 @@ height="250"}
 - **Outer loop methods**: 
 
    Run single-objective algorithms with different user prefererences
-     repeatetly.
+   repeatedly.
 
    ```{.python}
    solutions = set()
