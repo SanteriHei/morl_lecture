@@ -1,7 +1,7 @@
 ---
 title: "Introduction to multi-objective reinforcement learning"
 subtitle: ""
-date: 20-10-2024
+date: 12-11-2024
 author: Santeri Heiskanen
 bibliography: citations.bib
 format:
@@ -331,7 +331,7 @@ height="250"}
 
 - **Outer loop methods**: 
 
-   Run single-objective algorithms with different user prefererences
+   Run single-objective algorithms with different user preferences
    repeatedly.
 
    ```{.python}
@@ -458,7 +458,7 @@ height="250"}
   making algorithms](https://link.springer.com/article/10.1007/s10458-022-09552-y):  Hayes, Conor F., Roxana Rădulescu, Eugenio Bargiacchi, Johan Källström, Matthew Macfarlane, Mathieu Reymond, Timothy Verstraeten, et al. 2022. “A Practical Guide to Multi-Objective Reinforcement Learning and Planning.” Autonomous Agents and Multi-Agent Systems 36 (1): 26.
 
 - [Algorithm for continuous control tasks](https://proceedings.mlr.press/v119/xu20h.html): 
-Xu, Jie, Yunsheng Tian, Pingchuan Ma, Daniela Rus, Shinjiro Sueda, and Wojciech Matusik. 2022. “Prediction-Guided Multi-Objective Reinforcement Learning  for Continuous Robot Control.” In Proceedings of the 37th International Conference on Machine Learning.
+Xu, Jie, Yunsheng Tian, Pingchuan Ma, Daniela Rus, Shinjiro Sueda, and Wojciech Matusik. 2020. “Prediction-Guided Multi-Objective Reinforcement Learning  for Continuous Robot Control.” In Proceedings of the 37th International Conference on Machine Learning. 
 
 - [Sample-efficient MOLR algorithm based on GPI](https://arxiv.org/abs/2301.07784): 
 Alegre, Lucas N., Ana L. C. Bazzan, Diederik M. Roijers, Ann Nowé, and Bruno C. da Silva. 2023. “Sample-Efficient Multi-Objective Learning via Generalized Policy Improvement Prioritization.” In Proceedings of the 2023 International Conference on Autonomous Agents and Multiagent Systems.
