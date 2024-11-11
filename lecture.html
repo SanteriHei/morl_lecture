@@ -13,7 +13,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Santeri Heiskanen">
-  <meta name="dcterms.date" content="2025-08-10">
+  <meta name="dcterms.date" content="2024-12-11">
   <title>Introduction to multi-objective reinforcement learning</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -426,7 +426,7 @@ Santeri Heiskanen
 </div>
 </div>
 
-  <p class="date">2025-08-10</p>
+  <p class="date">2024-12-11</p>
 </section>
 <section id="multi-objective-reinforcement-learning-in-a-nutshell" class="slide level2 smaller">
 <h2>Multi-objective reinforcement learning in a nutshell</h2>
@@ -736,7 +736,7 @@ s_0\right]
 <li class="fragment"><p>Previous slides: The agent optimizes the <span class="alert">scalarized expected return/expected scalarized return</span>. However, our goal is to find a <span class="alert">set of solutions</span>.</p></li>
 <li class="fragment"><p><span class="citation" data-cites="roijers_multi-objective_2017">(<a href="#/references" role="doc-biblioref" onclick="">Roijers and Whiteson 2017</a>)</span> identified two approaches for solving a MORL task.</p></li>
 <li class="fragment"><p><strong>Outer loop methods</strong>:</p>
-<p>Run single-objective algorithms with different user prefererences repeatedly.</p>
+<p>Run single-objective algorithms with different user preferences repeatedly.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a>solutions <span class="op">=</span> <span class="bu">set</span>()</span>
 <span id="cb1-2"><a href=""></a><span class="cf">for</span> w <span class="kw">in</span> W:</span>
 <span id="cb1-3"><a href=""></a>   pi_w <span class="op">=</span> SORL(w) <span class="co"># Solve single-objective problem with given w</span></span>
@@ -869,7 +869,7 @@ q(a) da\)</span> is used. However, in theory any strongly concave function can b
 <li><p><a href="https://github.com/LucasAlegre/morl-baselines">MORL-baselines</a>: Baseline algorithms.</p></li>
 <li><p><a href="https://mo-gymnasium.farama.org/">MO-Gymnasium</a>: Multi-objective environments.</p></li>
 <li><p><a href="https://link.springer.com/article/10.1007/s10458-022-09552-y">Overview of theory and applications of multi-objective sequential decision making algorithms</a>: Hayes, Conor F., Roxana Rădulescu, Eugenio Bargiacchi, Johan Källström, Matthew Macfarlane, Mathieu Reymond, Timothy Verstraeten, et al.&nbsp;2022. “A Practical Guide to Multi-Objective Reinforcement Learning and Planning.” Autonomous Agents and Multi-Agent Systems 36 (1): 26.</p></li>
-<li><p><a href="https://proceedings.mlr.press/v119/xu20h.html">Algorithm for continuous control tasks</a>: Xu, Jie, Yunsheng Tian, Pingchuan Ma, Daniela Rus, Shinjiro Sueda, and Wojciech Matusik. 2022. “Prediction-Guided Multi-Objective Reinforcement Learning for Continuous Robot Control.” In Proceedings of the 37th International Conference on Machine Learning.</p></li>
+<li><p><a href="https://proceedings.mlr.press/v119/xu20h.html">Algorithm for continuous control tasks</a>: Xu, Jie, Yunsheng Tian, Pingchuan Ma, Daniela Rus, Shinjiro Sueda, and Wojciech Matusik. 2020. “Prediction-Guided Multi-Objective Reinforcement Learning for Continuous Robot Control.” In Proceedings of the 37th International Conference on Machine Learning.</p></li>
 <li><p><a href="https://arxiv.org/abs/2301.07784">Sample-efficient MOLR algorithm based on GPI</a>: Alegre, Lucas N., Ana L. C. Bazzan, Diederik M. Roijers, Ann Nowé, and Bruno C. da Silva. 2023. “Sample-Efficient Multi-Objective Learning via Generalized Policy Improvement Prioritization.” In Proceedings of the 2023 International Conference on Autonomous Agents and Multiagent Systems.</p></li>
 </ul>
 </section>
